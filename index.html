@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#7c3aed">
+<title>Hasan ♥ N</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,sans-serif}
+:root{--p:#7c3aed;--p2:#a78bfa;--bg:#f5f3ff;--card:#fff;--text:#32135f;--muted:#8b7aa8;--border:#e9d5ff}
+body{min-height:100vh;background:radial-gradient(circle at 20% 20%,#c4b5fd55,transparent 30%),radial-gradient(circle at 80% 80%,#f0abfc55,transparent 30%),linear-gradient(135deg,#5b21b6,#a78bfa,#ddd6fe);display:flex;align-items:center;justify-content:center;padding:12px;color:var(--text);overflow:hidden}
+.app{width:100%;max-width:440px;height:92vh;max-height:820px;background:var(--bg);border-radius:28px;overflow:hidden;box-shadow:0 25px 70px #4c1d9570;position:relative}
+.screen{height:100%;display:flex;flex-direction:column}
+
+/* Glass home / dashboard inspired by the supplied reference */
+#home{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:18px 14px 92px;
+background:
+ radial-gradient(circle at 15% 10%,#ffffffb8,transparent 25%),
+ radial-gradient(circle at 90% 18%,#d8b4fe55,transparent 30%),
+ radial-gradient(circle at 20% 85%,#fbcfe855,transparent 28%),
+ linear-gradient(145deg,#f8f7f5,#eee9f5 48%,#e7e0ef);
+color:#21152c}
+#home:before{content:"";position:absolute;inset:-30% -20%;background:repeating-radial-gradient(ellipse at 50% 35%,transparent 0 34px,#ffffff38 36px 38px);transform:rotate(-8deg);pointer-events:none;opacity:.65}
+.home-content{position:relative;z-index:1}
+.glass{background:#ffffff58;border:1px solid #ffffffa8;box-shadow:0 12px 35px #3b23401c,inset 0 1px 0 #fff8;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.home-top{display:flex;align-items:center;justify-content:space-between;margin:2px 4px 16px}
+.home-icon{width:46px;height:46px;border-radius:16px;border:1px solid #ffffffa8;background:#ffffff55;box-shadow:0 8px 25px #3b234014;display:flex;align-items:center;justify-content:center;font-size:21px;cursor:pointer}
+.home-title{text-align:center;flex:1;margin:0 10px}.home-title b{display:block;font-size:20px}.home-title span{font-size:11px;color:#796d82}
+.home-hero{border-radius:27px;padding:18px 17px;margin-bottom:13px;position:relative;overflow:hidden}
+.home-hero:after{content:"♥";position:absolute;left:-7px;bottom:-28px;font-size:115px;color:#7c3aed10;transform:rotate(12deg)}
+.hero-line{display:flex;align-items:center;gap:13px}.couple-avatar{width:58px;height:58px;border-radius:21px;background:linear-gradient(145deg,#7c3aed,#c4b5fd);color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;box-shadow:0 10px 25px #7c3aed35}
+.hero-copy{flex:1}.hero-copy b{font-size:17px}.hero-copy p{font-size:11px;color:#7d7185;margin-top:4px}
+.chat-cta{margin-top:15px;width:100%;border:0;border-radius:19px;padding:13px;background:linear-gradient(135deg,#5b21b6,#8b5cf6);color:#fff;font-size:14px;font-weight:800;box-shadow:0 12px 25px #7c3aed35;cursor:pointer}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:13px}
+.home-card{border-radius:23px;padding:15px;min-height:115px;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.home-card:active{transform:scale(.97)}.home-card .hc-icon{font-size:28px;margin-bottom:10px}.home-card b{display:block;font-size:14px}.home-card span{font-size:10px;color:#817487;display:block;margin-top:4px;line-height:1.6}
+.home-card.purple{background:linear-gradient(145deg,#ffffff75,#ddd6fe80)}.home-card.pink{background:linear-gradient(145deg,#ffffff75,#f5d0fe80)}.home-card.gold{background:linear-gradient(145deg,#ffffff75,#fde68a55)}.home-card.darkglass{background:linear-gradient(145deg,#ffffff75,#cbd5e155)}
+.home-section-title{font-size:15px;font-weight:800;margin:14px 5px 9px}
+.home-counter{border-radius:24px;padding:14px 16px;margin-bottom:13px;display:flex;align-items:center;gap:12px}
+.home-counter .hc-heart{font-size:31px}.home-counter b{font-size:14px}.home-counter small{display:block;color:#7d7185;margin-top:3px;font-size:10px}
+.home-bottom{position:fixed;z-index:20;bottom:10px;left:50%;transform:translateX(-50%);width:min(410px,calc(100% - 28px));height:68px;border-radius:25px;padding:7px;display:flex;align-items:center;justify-content:space-around}
+.home-nav{border:0;background:transparent;border-radius:18px;padding:8px 14px;min-width:70px;color:#65596d;font-size:11px;cursor:pointer}.home-nav.active{background:#ffffff85;color:#4c1d95;box-shadow:0 5px 16px #3b234018}.home-nav i{display:block;font-style:normal;font-size:21px;margin-bottom:2px}
+.back-home{margin-left:auto;background:#ffffff24;color:#fff;border:1px solid #ffffff45;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer}
+.dark #home{background:radial-gradient(circle at 15% 10%,#8b5cf622,transparent 25%),linear-gradient(145deg,#17131b,#211b28,#18141e);color:#eee5ff}
+.dark .glass{background:#ffffff0c;border-color:#ffffff18;box-shadow:0 12px 35px #0005,inset 0 1px 0 #fff1}.dark .home-card span,.dark .home-counter small{color:#b9a8cc}.dark .home-nav{color:#c7bad2}.dark .home-nav.active{background:#ffffff12;color:#e9d5ff}
+#login{justify-content:center;align-items:center;padding:30px;text-align:center;background:radial-gradient(circle at 20% 10%,#ede9fe,transparent 35%),radial-gradient(circle at 90% 90%,#ddd6fe,transparent 30%),#faf5ff;position:relative;overflow:hidden}
+.heart{font-size:64px;animation:pulse 1.5s infinite}@keyframes pulse{50%{transform:scale(1.14)}}
+.login-title{font-size:29px;font-weight:800;color:#5b21b6;margin:10px 0 5px}.login-sub{color:#8b5cf6;margin-bottom:25px}
+.password{width:100%;padding:14px;border:2px solid #ddd6fe;border-radius:17px;outline:none;margin:8px 0 12px;text-align:center;background:#fff}
+.user{width:100%;padding:14px;margin:6px 0;border:0;border-radius:18px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s}.user:active{transform:scale(.97)}
+.hasan{background:linear-gradient(90deg,#6d28d9,#8b5cf6);color:#fff;box-shadow:0 8px 20px #7c3aed30}.nadi{background:#ede9fe;color:#6b21a8}
+.header{padding:14px 16px;color:#fff;background:linear-gradient(110deg,#6d28d9,#a78bfa);position:relative;box-shadow:0 5px 20px #4c1d9530}
+.headrow{display:flex;align-items:center;gap:11px}.avatar{width:46px;height:46px;border-radius:50%;background:#ffffff25;font-size:22px;display:flex;align-items:center;justify-content:center;border:2px solid #ffffff80}.header h2{font-size:18px}
+.status{font-size:11px;opacity:.9;margin-top:2px}.status.online{color:#dcfce7}.iconbtn{margin-right:auto;background:#ffffff22;color:#fff;border:0;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px}
+.menu{position:absolute;left:12px;top:65px;background:#fff;border-radius:17px;padding:7px;box-shadow:0 12px 35px #0003;display:none;z-index:50}.menu button{display:block;border:0;background:none;padding:11px 14px;width:190px;text-align:right;color:#4c1d95;border-radius:10px;cursor:pointer}
+.searchbar{display:none;background:#fff;padding:8px;border-bottom:1px solid #ede9fe}.searchbar input{width:100%;border:2px solid #ddd6fe;border-radius:20px;padding:9px 13px;outline:none}
+.messages{flex:1;overflow-y:auto;padding:18px 14px 25px;display:flex;flex-direction:column;gap:11px;background:radial-gradient(circle at 10% 20%,#ddd6fe30,transparent 25%),linear-gradient(#f8f7ff,#f3efff)}
+.msg{max-width:84%;padding:11px 14px;border-radius:19px;box-shadow:0 3px 12px #4c1d9512;position:relative;word-break:break-word;animation:messageIn .2s ease}
+@keyframes messageIn{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}
+.me{align-self:flex-start;background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;border-bottom-right-radius:5px}.other{align-self:flex-end;background:#fff;color:#43206d;border:1px solid #e9d5ff;border-bottom-left-radius:5px}
+.msgname{font-size:11px;font-weight:700;margin-bottom:4px;opacity:.8}.body{line-height:1.8;white-space:pre-wrap}.msgtime{font-size:9px;opacity:.65;margin-top:5px;text-align:left}.edited{font-size:9px;opacity:.55;margin-right:4px}
+.replybox{border-right:3px solid #c4b5fd;background:#ffffff20;padding:5px 8px;margin-bottom:7px;font-size:10px;border-radius:7px}.other .replybox{background:#f5f3ff}
+.reaction{position:absolute;bottom:-11px;left:8px;background:#fff;color:#32135f;border-radius:14px;padding:3px 7px;font-size:13px;box-shadow:0 2px 8px #0002}.pinned{position:absolute;top:-9px;right:8px;background:#fbbf24;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
+.typing{height:22px;padding:0 18px;color:#8b5cf6;font-size:11px;background:#f3efff}
+.replyPreview{display:none;background:#fff;border-top:1px solid #ede9fe;padding:8px 12px}.replyPreviewBox{border-right:3px solid #8b5cf6;padding-right:8px;font-size:11px;color:#6d28a8}.replyPreview button{float:left;border:0;background:none;font-size:16px;color:#8b5cf6}
+.inputbar{background:#fff;padding:9px;display:flex;gap:7px;border-top:1px solid #ede9fe;align-items:center}.inputbar input{flex:1;border:2px solid #ddd6fe;border-radius:25px;padding:12px 15px;outline:none;background:#faf5ff;font-size:14px}.send{width:46px;height:46px;border:0;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:#fff;font-size:19px;cursor:pointer}.miniBtn{width:39px;height:39px;border:0;border-radius:50%;background:#ede9fe;color:#6d28d9;font-size:19px;cursor:pointer}
+.emojiPanel{display:none;position:absolute;bottom:67px;right:8px;left:8px;background:#fff;border:1px solid #e9d5ff;border-radius:18px;padding:10px;box-shadow:0 15px 45px #0003;z-index:45}.emojiGrid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}.emojiGrid button{border:0;background:none;font-size:23px;padding:6px;border-radius:10px;cursor:pointer}.emojiGrid button:hover{background:#f5f3ff}
+.mediaPreview{display:none;background:#fff;border-top:1px solid #ede9fe;padding:8px 12px;font-size:11px;color:#6d28d9}.mediaPreview span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mediaPreview button{float:left;border:0;background:none;color:#7c3aed;font-size:17px}
+.actions{position:fixed;z-index:200;background:#fff;border-radius:18px;padding:8px;box-shadow:0 15px 45px #0004;display:none;width:235px}.reactionRow{display:flex;justify-content:space-around;padding:5px;border-bottom:1px solid #eee;margin-bottom:4px}.reactionRow button{border:0;background:none;font-size:22px;cursor:pointer;padding:5px}.actionBtn{width:100%;border:0;background:none;padding:10px;text-align:right;border-radius:9px;color:#43206d;cursor:pointer}.actionBtn:hover{background:#f5f3ff}
+.panel{position:absolute;inset:0;background:#faf5ff;z-index:100;display:none;flex-direction:column}.panelhead{padding:17px;background:linear-gradient(110deg,#6d28d9,#a78bfa);color:#fff;display:flex;align-items:center;gap:12px}.close{margin-right:auto;border:0;background:#ffffff25;color:#fff;border-radius:50%;width:36px;height:36px;cursor:pointer}.panelbody{padding:20px;overflow:auto}.card{background:#fff;border:1px solid #ede9fe;border-radius:20px;padding:17px;margin-bottom:12px;box-shadow:0 5px 15px #4c1d9510}.counter{text-align:center;color:#6d28d9;padding:25px 15px}.counter .big{font-size:27px;font-weight:800;margin:5px 0}.counter .small{color:#8b5cf6;font-size:12px}.profile-avatar{width:85px;height:85px;margin:auto;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#c4b5fd);display:flex;align-items:center;justify-content:center;font-size:40px}
+.timeline{border-right:3px solid #c4b5fd;padding-right:14px}.event{margin-bottom:17px;position:relative}.event:before{content:"";position:absolute;right:-21px;top:3px;width:10px;height:10px;border-radius:50%;background:#7c3aed}.event b{color:#6d28d9}.event p{font-size:12px;color:#8b7aa8;margin-top:4px}
+.toast{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);background:#2e1065;color:#fff;padding:10px 15px;border-radius:15px;display:none;z-index:300;font-size:12px;box-shadow:0 8px 25px #0004;white-space:nowrap}
+.uploading{position:absolute;inset:0;background:#0006;z-index:400;display:none;align-items:center;justify-content:center;color:#fff;text-align:center}.uploadCard{background:#fff;color:#4c1d95;border-radius:20px;padding:20px;width:80%}.bar{height:8px;background:#ede9fe;border-radius:8px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:#7c3aed}
+.media{max-width:100%;border-radius:13px;margin-top:5px;display:block}.fileCaption{font-size:12px;margin-top:4px}.voiceBtn.recording{background:#ef4444;color:#fff;animation:pulse 1s infinite}
+.dark{--bg:#17121f;--card:#211a2b;--text:#eee5ff;--muted:#b9a8cc}.dark .messages{background:#17121f}.dark .other,.dark .card,.dark .panel,.dark .inputbar,.dark .replyPreview,.dark .searchbar,.dark .emojiPanel,.dark .mediaPreview{background:#211a2b;color:#eee5ff}.dark .inputbar input,.dark .searchbar input{background:#17121f;color:#fff;border-color:#49375c}.dark .menu,.dark .actions{background:#211a2b}.dark .menu button,.dark .actionBtn{color:#eee5ff}.dark .actionBtn:hover,.dark .emojiGrid button:hover{background:#30243c}.dark .typing{background:#17121f}.dark .reactionRow{border-color:#49375c}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#c4b5fd;border-radius:10px}
+
+/* LUDO */
+#ludo{display:none;position:absolute;inset:0;z-index:150;background:linear-gradient(145deg,#f8f7ff,#eee8f8);overflow:auto}
+.ludo-wrap{max-width:440px;margin:auto;padding:14px}
+.lh{display:flex;align-items:center;gap:10px;margin-bottom:12px}.lh button{width:42px;height:42px;border:1px solid #fff;background:#ffffff80;backdrop-filter:blur(18px);border-radius:15px;font-size:20px}.lh-title{flex:1;text-align:center}.lh-title b{display:block;font-size:19px}.lh-title small{color:#8b7aa8}
+.lglass{background:#ffffff70;border:1px solid #ffffffc0;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 12px 35px #4c1d9515;border-radius:24px}
+.lobby{text-align:center;padding:22px}.lobby .big{font-size:48px}.lobby h3{margin:7px}.lobby p{font-size:11px;color:#8b7aa8;line-height:1.9;margin-bottom:12px}
+.linput{width:100%;padding:13px;border:1px solid #ffffff;background:#ffffff90;border-radius:15px;text-align:center;outline:none;margin:6px 0}
+.lbtn{width:100%;padding:13px;border:0;border-radius:16px;margin:5px 0;font-weight:800;background:linear-gradient(135deg,#6d28d9,#a78bfa);color:#fff;box-shadow:0 8px 20px #7c3aed25}.lbtn.alt{background:#ffffff90;color:#6d28d9}
+.room{text-align:center;padding:14px;margin-bottom:10px}.code{font-size:25px;font-weight:900;letter-spacing:6px;color:#6d28d9;margin:4px}.lstatus{font-size:11px;color:#8b7aa8}
+.lboardcard{padding:10px}.lboard{width:min(92vw,390px);aspect-ratio:1;margin:auto;position:relative;border-radius:25px;overflow:hidden;background:linear-gradient(135deg,#ffffff90,#ede9fe90);border:1px solid #fff;box-shadow:inset 0 0 30px #7c3aed10}
+.lhome{position:absolute;width:31%;height:31%;border-radius:23px;background:#ffffff55;border:1px solid #fff;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px}.lhome.a{right:4%;top:4%;background:#ddd6fe65}.lhome.b{left:4%;bottom:4%;background:#fbcfe865}.lbase{border-radius:50%;background:#ffffffb0;border:2px solid #c4b5fd;display:flex;align-items:center;justify-content:center}
+.lcenter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:25%;height:25%;border-radius:22px;background:linear-gradient(135deg,#7c3aed,#c4b5fd);display:flex;align-items:center;justify-content:center;font-size:30px;color:white;z-index:2}
+.ltrack{position:absolute;inset:9%;border:2px dashed #a78bfa70;border-radius:50%}
+.lspot{position:absolute;width:9%;height:9%;border-radius:11px;background:#ffffffb0;border:1px solid #fff;display:flex;align-items:center;justify-content:center;font-size:8px}
+.ltoken{position:absolute;width:25px;height:25px;border-radius:50%;border:2px solid #fff;z-index:5;color:#fff;font-size:10px;font-weight:bold;box-shadow:0 4px 10px #0003;cursor:pointer}.ltoken.a{background:linear-gradient(135deg,#6d28d9,#a78bfa)}.ltoken.b{background:linear-gradient(135deg,#ec4899,#f9a8d4)}.ltoken.movable{outline:3px solid #fbbf24;animation:lp .65s infinite alternate}@keyframes lp{to{transform:scale(1.14)}}
+.lplayers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.lp{padding:10px;border-radius:17px;font-size:11px}.lp.active{box-shadow:0 0 0 2px #8b5cf6 inset}.lp b{display:block;font-size:13px}.lp small{color:#8b7aa8}
+.lcontrols{display:flex;gap:10px;align-items:center;margin-top:10px}.dice{width:70px;height:70px;border:0;border-radius:20px;background:#ffffffb0;box-shadow:0 8px 20px #00000012;font-size:38px}.dice:disabled{opacity:.4}.turn{flex:1;font-size:11px;color:#7b6b84;line-height:1.8}.turn b{display:block;color:#6d28d9;font-size:13px}
+.llog{padding:10px;margin-top:9px;font-size:10px;color:#8b7aa8}.lwinner{position:absolute;inset:0;background:#4c1d95cc;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:20}.wcard{width:86%;padding:25px;text-align:center;background:#fffffff2;border-radius:25px;color:#4c1d95}.wcard .wi{font-size:55px}
+
+/* Galaxy-love universe and surprise vault */
+.universe-screen{display:none;position:absolute;inset:0;z-index:70;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#35105f 0%,#12091f 48%,#05040d 100%);color:#fff}
+#galaxyCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.universe-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 20%,#05030cbb 100%)}
+.universe-top{position:absolute;top:15px;left:15px;right:15px;display:flex;align-items:center;justify-content:space-between;z-index:2}
+.universe-top button{border:1px solid #ffffff35;background:#ffffff12;color:#fff;border-radius:15px;padding:10px 13px;backdrop-filter:blur(12px);cursor:pointer}
+.universe-title{position:absolute;z-index:2;top:22%;left:0;right:0;text-align:center;padding:0 22px;text-shadow:0 0 25px #d8b4fe}
+.universe-title h2{font-size:27px;letter-spacing:.5px}.universe-title p{font-size:12px;color:#e9d5ff;margin-top:8px;line-height:1.8}
+.universe-orb{position:absolute;z-index:1;left:50%;top:51%;width:170px;height:170px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff 0 1%,#fbcfe8 3%,#c084fc 14%,#6d28d9 42%,#211044 68%,#090614 76%);box-shadow:0 0 25px #c084fc99,0 0 70px #9333ea66,0 0 130px #ec489955;animation:orbFloat 5s ease-in-out infinite}
+.universe-orb:before,.universe-orb:after{content:"";position:absolute;inset:22px -27px;border:2px solid #f5d0fe99;border-radius:50%;transform:rotate(-28deg);box-shadow:0 0 15px #e879f9aa}.universe-orb:after{inset:38px -42px;border-color:#a5b4fc66;transform:rotate(28deg)}
+@keyframes orbFloat{0%,100%{margin-top:-5px}50%{margin-top:8px}}
+.universe-actions{position:absolute;z-index:3;bottom:26px;left:18px;right:18px;display:grid;gap:10px}
+.universe-action{border:1px solid #ffffff38;background:#ffffff12;color:white;border-radius:17px;padding:13px;font-size:13px;font-weight:700;backdrop-filter:blur(14px);cursor:pointer}
+.universe-action.primary{background:linear-gradient(120deg,#7c3aeddd,#db2777cc);border-color:#f5d0fe88}
+.surprise-create{display:grid;gap:10px}.surprise-create input,.surprise-create textarea,.surprise-create select{width:100%;border:1px solid #e9d5ff;border-radius:13px;padding:11px;background:#fff;color:#32135f;outline:none}.surprise-create textarea{min-height:95px;resize:vertical}
+.surprise-gift{border:1px solid #f5d0fe;background:linear-gradient(145deg,#fff7ff,#f3e8ff);color:#4c1d95;border-radius:20px;padding:15px;margin:10px 0;text-align:center}
+.surprise-gift .gift-icon{font-size:48px;filter:drop-shadow(0 6px 12px #c084fc88);animation:giftPulse 2s ease-in-out infinite}@keyframes giftPulse{50%{transform:translateY(-4px) rotate(2deg)}}
+.surprise-result{display:none}.feature-note{font-size:11px;line-height:1.8;color:#8b7aa8;margin-top:8px}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+<section id="login" class="screen">
+<div class="heart">❤️</div><div class="login-title">Hasan ♥ N</div><div class="login-sub">اتاق خصوصی دونفره</div>
+<button id="hasanLogin" class="user hasan" type="button">👤 من Hasan هستم</button>
+<button id="nadiLogin" class="user nadi" type="button">👤 من N هستم</button>
+<small style="color:#a78bfa;margin-top:12px">❤️ فقط برای ما دوتا</small>
+</section>
+
+<section id="home" class="screen">
+<div class="home-content">
+  <div class="home-top">
+    <button class="home-icon" onclick="toggleDark()">☼</button>
+    <div class="home-title"><b>Hasan ♥ N</b><span>خانه‌ی عشق ما</span></div>
+    <button class="home-icon" onclick="openPanel('settings')">⚙️</button>
+  </div>
+
+  <div class="home-hero glass">
+    <div class="hero-line">
+      <div class="couple-avatar">❤️</div>
+      <div class="hero-copy"><b id="homeGreeting">سلام 👋</b><p>به فضای خصوصی خودمون خوش اومدی</p></div>
+    </div>
+    <button class="chat-cta" onclick="openChat()">💬 ورود به چت</button>
+  </div>
+
+  <div class="home-counter glass" id="homeCounter">
+    <div class="hc-heart">💜</div><div><b>مدت عشق ما</b><small>در حال محاسبه...</small></div>
+  </div>
+
+  <div class="home-section-title">بخش‌های ما</div>
+  <div class="home-grid">
+    <div class="home-card glass purple" onclick="openPanel('profile')"><div class="hc-icon">👤</div><b>پروفایل</b><span>حساب و فضای دونفره</span></div>
+    <div class="home-card glass pink" onclick="openPanel('love')"><div class="hc-icon">❤️</div><b>داستان ما</b><span>تاریخ شروع و لحظه‌های مهم</span></div>
+    <div class="home-card glass gold" onclick="openPanel('settings')"><div class="hc-icon">⚙️</div><b>تنظیمات</b><span>حالت شب و اعلان‌ها</span></div>
+    <div class="home-card glass darkglass" onclick="openChat()"><div class="hc-icon">💬</div><div class="home-card glass darkglass" onclick="openLudo()"><div class="hc-icon">🎲</div><b>منچ دو نفره</b><span>آنلاین بازی کنیم ❤️</span></div><b>پیام‌های ما</b><span>عکس، ویدیو، ویس و پیام</span></div>
+  </div>
+
+  <div class="home-section-title">✨ دنیای اختصاصی ما</div>
+  <div class="home-grid">
+    <div class="home-card glass purple" onclick="openUniverse()"><div class="hc-icon">🌌</div><b>دنیای کهکشانی</b><span>فضای عاشقانه با ستاره‌های متحرک</span></div>
+    <div class="home-card glass pink" onclick="openPanel('surprise')"><div class="hc-icon">🎁</div><b>جعبه سورپرایز</b><span>هدیه مخفی با رمز مخصوص</span></div>
+  </div>
+
+  <div class="home-section-title">میانبرها</div>
+  <div class="home-grid">
+    <div class="home-card glass purple" onclick="openPanel('love')"><div class="hc-icon">💞</div><b>عشق ما</b><span>با هم از اول تا امروز</span></div>
+    <div class="home-card glass pink" onclick="logout()"><div class="hc-icon">🚪</div><b>خروج</b><span>خروج از این دستگاه</span></div>
+  </div>
+</div>
+<div class="home-bottom glass">
+  <button class="home-nav active" onclick="showHome()"><i>⌂</i>خانه</button>
+  <button class="home-nav" onclick="openChat()"><i>💬</i>چت</button>
+  <button class="home-nav" onclick="openPanel('love')"><i>❤️</i>عشق ما</button>
+  <button class="home-nav" onclick="openPanel('settings')"><i>⚙️</i>تنظیمات</button>
+</div>
+</section>
+
+
+<section id="universe" class="universe-screen">
+  <canvas id="galaxyCanvas" aria-label="دنیای کهکشانی متحرک"></canvas><div class="universe-vignette"></div>
+  <div class="universe-top"><button onclick="closeUniverse()">↩ برگشت</button><button onclick="spawnHearts()">💗 بفرست قلب</button></div>
+  <div class="universe-title"><h2>Hasan <span style="color:#f9a8d4">♥</span> N</h2><p>یک کهکشان کوچک، فقط برای دوتامون ✨<br>روی صفحه لمس کن تا قلب‌ها متولد بشن</p></div>
+  <div class="universe-orb" aria-hidden="true"></div>
+  <div class="universe-actions"><button class="universe-action primary" onclick="closeUniverse();openPanel('surprise')">🎁 ساختن سورپرایز مخفی</button><button class="universe-action" onclick="spawnHearts()">💞 پر کردن آسمون با قلب</button></div>
+</section>
+
+<section id="ludo" class="screen">
+<div class="ludo-wrap">
+<div class="lh"><button onclick="closeLudo()">‹</button><div class="lh-title"><b>🎲 منچ دو نفره</b><small>Hasan ♥ N</small></div><button onclick="toggleDark()">☼</button></div>
+
+<div id="lobby" class="lglass lobby">
+<div class="big">🎲❤️</div><h3>منچ آنلاین دونفره</h3>
+<p>یک اتاق بساز و کدش را برای نفر دوم بفرست، یا با کد وارد اتاق شو.</p>
+<button class="lbtn" onclick="createLudo()">➕ ساخت بازی</button>
+<input id="joinCode" class="linput" maxlength="6" placeholder="کد ۶ حرفی بازی">
+<button class="lbtn alt" onclick="joinLudo()">🚪 پیوستن به بازی</button>
+<div id="lobbyMsg" class="lstatus"></div>
+</div>
+
+<div id="lgame" style="display:none">
+<div class="lglass room"><div class="lstatus">کد اتاق</div><div id="roomCode" class="code">------</div><div id="roomStatus" class="lstatus">در انتظار بازیکن دوم...</div><button class="lbtn alt" onclick="copyLudoCode()">📋 کپی کد</button></div>
+<div class="lglass lboardcard">
+<div id="lboard" class="lboard"><div class="ltrack"></div>
+<div class="lhome a"><div class="lbase">🟣</div><div class="lbase">🟣</div><div class="lbase">🟣</div><div class="lbase">🟣</div></div>
+<div class="lhome b"><div class="lbase">🌸</div><div class="lbase">🌸</div><div class="lbase">🌸</div><div class="lbase">🌸</div></div>
+<div class="lcenter">❤️</div></div>
+<div class="lplayers"><div id="lpHasan" class="lglass lp"><b>🟣 Hasan</b><small>۰/۴</small></div><div id="lpNadi" class="lglass lp"><b>🌸 N</b><small>۰/۴</small></div></div>
+<div class="lcontrols"><button id="dice" class="dice" onclick="rollLudo()" disabled>🎲</button><div class="turn"><b id="turnTitle">منتظر بازیکن دوم...</b><span id="turnSub">برای شروع تاس بریز.</span></div></div>
+<div id="llog" class="lglass llog">هنوز حرکتی انجام نشده ❤️</div>
+</div></div>
+</div>
+<div id="lwin" class="lwinner"><div class="wcard"><div class="wi">🏆</div><h2 id="winText"></h2><p>چه بازی خفنی بود 😍</p><button class="lbtn" onclick="resetLudo()">🔄 بازی دوباره</button><button class="lbtn alt" onclick="closeLudo()">🏠 برگشت</button></div></div>
+</section>
+
+<section id="chat" class="screen" style="display:none">
+<header class="header"><div class="headrow"><div class="avatar">❤️</div><div><h2>Hasan ♥ N</h2><div class="status" id="status">● در حال اتصال...</div></div><button class="back-home" onclick="showHome()" title="خانه">⌂</button><button class="iconbtn" onclick="toggleMenu()">☰</button></div>
+<div class="menu" id="menu">
+<button onclick="toggleSearch()">🔍 جستجوی پیام</button><button onclick="openLudo()">🎲 منچ دو نفره</button><button onclick="openPanel('profile')">👤 پروفایل</button><button onclick="openPanel('love')">❤️ داستان ما</button><button onclick="openPanel('settings')">⚙️ تنظیمات</button><button onclick="logout()">🚪 خروج</button>
+</div></header>
+<div class="searchbar" id="searchbar"><input id="searchInput" placeholder="جستجو در پیام‌ها..." oninput="searchMessages()"></div>
+<div id="messages" class="messages"></div>
+<div id="typing" class="typing"></div>
+<div id="replyPreview" class="replyPreview"><button onclick="cancelReply()">✕</button><div class="replyPreviewBox">پاسخ به: <strong id="replyName"></strong><div id="replyText"></div></div></div>
+<div id="mediaPreview" class="mediaPreview"><button onclick="cancelMedia()">✕</button><span id="mediaName"></span></div>
+<div id="emojiPanel" class="emojiPanel"><div class="emojiGrid" id="emojiGrid"></div></div>
+<div class="inputbar">
+<button class="miniBtn" onclick="toggleEmoji()">😊</button>
+<button class="miniBtn" onclick="document.getElementById('fileInput').click()">📎</button>
+<input id="fileInput" type="file" accept="image/*,video/*" style="display:none" onchange="prepareMedia(this.files[0])">
+<button class="miniBtn voiceBtn" id="voiceBtn" onclick="toggleRecording()">🎤</button>
+<input id="input" placeholder="پیامت رو بنویس..." autocomplete="off" oninput="handleTyping()"><button class="send" onclick="send()">➤</button>
+</div>
+</section>
+
+<div id="actions" class="actions">
+<div class="reactionRow"><button onclick="chooseReaction('❤️')">❤️</button><button onclick="chooseReaction('😂')">😂</button><button onclick="chooseReaction('😍')">😍</button><button onclick="chooseReaction('😢')">😢</button><button onclick="chooseReaction('😡')">😡</button></div>
+<button class="actionBtn" onclick="startReply()">↩️ پاسخ</button><button class="actionBtn" onclick="copySelected()">📋 کپی</button><button class="actionBtn" onclick="pinSelected()">📌 سنجاق / برداشتن سنجاق</button><button class="actionBtn" id="editButton" onclick="editSelected()">✏️ ویرایش</button><button class="actionBtn" id="deleteButton" onclick="deleteSelected()">🗑️ حذف</button>
+</div>
+
+<section id="profile" class="panel"><div class="panelhead"><b>👤 پروفایل</b><button class="close" onclick="closePanels()">✕</button></div><div class="panelbody"><div class="card" style="text-align:center"><div class="profile-avatar">❤️</div><h3 id="profileName" style="margin-top:15px"></h3><p style="margin-top:8px;color:#8b5cf6">این حساب وارد شده است ❤️</p></div><div class="card"><b>💞 اتاق ما</b><p style="font-size:12px;color:#8b7aa8;margin-top:8px">یک فضای خصوصی برای پیام، عکس، ویدیو و ویس‌های Hasan و N.</p></div></div></section>
+
+<section id="love" class="panel"><div class="panelhead"><b>❤️ داستان ما</b><button class="close" onclick="closePanels()">✕</button></div><div class="panelbody">
+<div class="card counter" id="counter">در حال محاسبه...</div>
+<div class="card"><div class="timeline">
+<div class="event"><b>۲۳ خرداد ۱۴۰۴ ❤️</b><p>روزی که داستان Hasan و N شروع شد.</p></div>
+<div class="event"><b>امروز 💜</b><p>هنوز داریم لحظه‌های خودمون رو می‌سازیم.</p></div>
+</div></div>
+</div></section>
+
+<section id="settings" class="panel"><div class="panelhead"><b>⚙️ تنظیمات</b><button class="close" onclick="closePanels()">✕</button></div><div class="panelbody">
+<div class="card"><button class="user nadi" onclick="toggleDark()">🌙 تغییر حالت شب</button><button class="user nadi" onclick="requestNotify()">🔔 فعال‌کردن اعلان پیام</button><button class="user hasan" onclick="clearLocal()">🧹 خروج از این دستگاه</button></div>
+</div></section>
+
+<section id="surprise" class="panel"><div class="panelhead"><b>🎁 جعبه سورپرایز</b><button class="close" onclick="closePanels()">✕</button></div><div class="panelbody">
+<div class="card"><div class="surprise-gift"><div class="gift-icon">🎁</div><b>یک سورپرایز برای Hasan ♥ N</b><p style="font-size:12px;margin-top:7px;line-height:1.8">هدیه بساز، برایش رمز تعیین کن و رمز را فقط به طرف مقابل بگو.</p></div>
+<div class="surprise-create"><label for="giftTitle">عنوان هدیه</label><input id="giftTitle" maxlength="70" placeholder="مثلاً یه حرف از ته قلبم 💌"><label for="giftMessage">متن یا پیام داخل جعبه</label><textarea id="giftMessage" maxlength="2000" placeholder="پیامت رو اینجا بنویس..."></textarea><label for="giftCode">رمز مخصوص (حداقل 4 کاراکتر)</label><input id="giftCode" type="password" minlength="4" maxlength="80" autocomplete="new-password" placeholder="یک رمز که فقط خودتون می‌دونید"><label for="giftRecipient">برای چه کسی؟</label><select id="giftRecipient"><option value="N">برای N 💗</option><option value="Hasan">برای Hasan 💜</option></select><button class="user hasan" onclick="createSurprise()">✨ ساخت جعبه مخفی</button></div></div>
+<div class="card"><b>🔐 بازکردن جعبه</b><p style="font-size:12px;color:#8b7aa8;margin:6px 0 10px">کد جعبه را وارد کن، سپس رمز آن را بنویس.</p><div class="surprise-create"><input id="openGiftId" maxlength="24" placeholder="کد جعبه"><input id="openGiftCode" type="password" autocomplete="off" placeholder="رمز مخصوص"><button class="user nadi" onclick="openSurprise()">🎀 باز کردن جعبه</button></div><div id="surpriseResult" class="surprise-result"></div></div>
+<p class="feature-note">نکته حریم خصوصی: با قوانین فعلی دیتابیس، این قفل داخل سایت است و به‌تنهایی تضمین امنیت واقعی محتوای ذخیره‌شده نیست. برای محرمانگی واقعی باید دسترسی Firebase هم محدود شود.</p>
+</div></section>
+
+<div id="toast" class="toast"></div>
+<div id="uploading" class="uploading"><div class="uploadCard">⏳ در حال آپلود فایل...<div class="bar"><i id="uploadBar"></i></div><small id="uploadText">۰٪</small></div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
+<script>
+const firebaseConfig={
+ apiKey:"AIzaSyApRWz3VlVu5vJ-lr6XOvmU7xQ5LHXHajE",
+ authDomain:"hasan-nadi-chat.firebaseapp.com",
+ databaseURL:"https://hasan-nadi-chat-default-rtdb.europe-west1.firebasedatabase.app",
+ projectId:"hasan-nadi-chat",
+ storageBucket:"hasan-nadi-chat.firebasestorage.app",
+ messagingSenderId:"447911828704",
+ appId:"1:447911828704:web:839f082973cc21735c8485",
+ measurementId:"G-D51K3ZX31"
+};
+firebase.initializeApp(firebaseConfig);
+const API_BASE="https://calm-brook-449e.sre-tools-7c2095.workers.dev";
+const storage=firebase.storage();
+
+// Firebase-compatible small REST/polling adapter. The browser talks only to the Worker.
+const _listeners=new Map();
+function _path(p){return String(p||'').replace(/^\/+|\/+$/g,'');}
+function _url(p){return API_BASE+'/db/'+_path(p).split('/').map(encodeURIComponent).join('/');}
+function _snap(v){return {val:()=>v,exists:()=>v!==null&&v!==undefined};}
+async function _request(p,method='GET',body){
+  const opt={method,headers:{'Content-Type':'application/json'},cache:'no-store'};
+  if(body!==undefined) opt.body=JSON.stringify(body);
+  const r=await fetch(_url(p),opt);
+  if(!r.ok) throw new Error('API '+r.status);
+  let v=null; try{v=await r.json()}catch(e){}
+  return v;
+}
+function _watch(p,cb){
+  p=_path(p);
+  const key=p+'::'+String(cb);
+  let stopped=false;
+  const run=async()=>{try{const v=await _request(p);if(!stopped)cb(_snap(v))}catch(e){console.warn('API read',p,e)}};
+  run();
+  const timer=setInterval(run,1200);
+  _listeners.set(key,{cb,timer,p});
+  return key;
+}
+const db={ref(p){
+  p=_path(p);
+  return {
+    on(event,cb){if(event!=='value')return;return _watch(p,cb)},
+    off(event,cb){if(event&&event!=='value')return;for(const [k,x] of _listeners){if(x.p===p&&(!cb||x.cb===cb)){clearInterval(x.timer);_listeners.delete(k)}}},
+    once(event){return _request(p).then(v=>_snap(v))},
+    set(v){return _request(p,'PUT',v)},
+    update(v){return _request(p,'PATCH',v)},
+    remove(){return _request(p,'DELETE')},
+    push(v){const id='-N'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);return _request(p+'/'+id,'PUT',v).then(()=>({key:id}))},
+    onDisconnect(){return {update:()=>Promise.resolve(),set:()=>Promise.resolve()}}
+  }
+}};
+
+let currentUser=null,listener=null,selectedMessage=null,replyTo=null,typingTimer=null;
+let selectedMedia=null,mediaPreviewUrl=null,mediaRecorder=null,audioChunks=[],recording=false;
+
+const emojis=['❤️','😍','🥰','😘','😂','🤣','😊','😉','😎','🥹','😭','😢','😡','🤍','💜','🩷','💖','💗','💞','💕','🔥','✨','🎉','🥳','👍','👏','🙏','💋','🌹','🫶','🤗','😴','🙈','😇','🤩','😋','😜','🤭','😮','🥺'];
+document.getElementById('emojiGrid').innerHTML=emojis.map(e=>`<button onclick="insertEmoji('${e}')">${e}</button>`).join('');
+
+function login(name){
+ currentUser=name;localStorage.chatUser=name;
+ document.getElementById('login').style.display='none';
+ document.getElementById('chat').style.display='none';
+ document.getElementById('home').style.display='block';
+ document.getElementById('profileName').textContent='سلام '+name+' 👋';
+ document.getElementById('homeGreeting').textContent='سلام '+name+' 👋';
+ load();setOnline(true);updateHomeCounter();
+}
+
+function formatTime(timestamp){
+ const d=new Date(Number(timestamp)||Date.now());
+ return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
+}
+function formatDate(timestamp){
+ return new Date(Number(timestamp)||Date.now()).toLocaleDateString('fa-IR',{year:'numeric',month:'long',day:'numeric'});
+}
+
+function mediaHTML(m){
+ if(!m.url)return '';
+ if(m.mediaType==='image') return `<img class="media" src="${escapeAttr(m.url)}" loading="lazy" alt="تصویر">`;
+ if(m.mediaType==='video') return `<video class="media" src="${escapeAttr(m.url)}" controls playsinline preload="metadata"></video>`;
+ if(m.mediaType==='audio') return `<audio class="media" src="${escapeAttr(m.url)}" controls></audio>`;
+ return '';
+}
+function escapeAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function load(){
+ const box=document.getElementById('messages');
+ if(listener) db.ref('messages').off('value',listener);
+ listener=s=>{
+  box.innerHTML='';
+  const data=s.val()||{};
+  let arr=Object.entries(data).map(([id,v])=>({...v,id})).sort((a,b)=>(a.timestamp||0)-(b.timestamp||0));
+  const search=document.getElementById('searchInput').value.trim().toLowerCase();
+  if(search) arr=arr.filter(m=>String(m.text||'').toLowerCase().includes(search)||String(m.fileName||'').toLowerCase().includes(search));
+  if(!arr.length){
+   box.innerHTML=`<div style="text-align:center;color:#a78bfa;margin-top:45px;line-height:2">${search?'🔍<br>پیامی پیدا نشد':'❤️<br>هنوز پیامی نیست...<br>اولین پیام رو بفرست'}</div>`;
+   return;
+  }
+  arr.forEach(m=>{
+   const el=document.createElement('div');el.className='msg '+(m.name===currentUser?'me':'other');
+   if(m.pinned){const p=document.createElement('div');p.className='pinned';p.textContent='📌';el.appendChild(p)}
+   const name=document.createElement('div');name.className='msgname';name.textContent=m.name;el.appendChild(name);
+   if(m.reply){const rb=document.createElement('div');rb.className='replybox';rb.textContent=m.reply.name+': '+m.reply.text;el.appendChild(rb)}
+   if(m.text){const body=document.createElement('div');body.className='body';body.textContent=m.text;el.appendChild(body)}
+   if(m.mediaType){const wrap=document.createElement('div');wrap.innerHTML=mediaHTML(m);el.appendChild(wrap.firstChild)}
+   if(m.fileName && m.mediaType!=='image' && m.mediaType!=='video' && m.mediaType!=='audio'){const f=document.createElement('div');f.className='fileCaption';f.textContent=m.fileName;el.appendChild(f)}
+   const timeEl=document.createElement('div');timeEl.className='msgtime';timeEl.textContent=formatTime(m.timestamp)+' • '+formatDate(m.timestamp);
+   if(m.edited){const ed=document.createElement('span');ed.className='edited';ed.textContent=' ویرایش شد';timeEl.appendChild(ed)}
+   el.appendChild(timeEl);
+   if(m.reaction){const r=document.createElement('div');r.className='reaction';r.textContent=m.reaction;el.appendChild(r)}
+   let pressTimer;
+   el.addEventListener('touchstart',()=>{pressTimer=setTimeout(()=>openActions(m,el),550)},{passive:true});
+   el.addEventListener('touchend',()=>clearTimeout(pressTimer));el.addEventListener('touchmove',()=>clearTimeout(pressTimer));
+   el.addEventListener('dblclick',()=>{selectedMessage=m;chooseReaction('❤️')});
+   box.appendChild(el);
+  });
+  box.scrollTop=box.scrollHeight;
+ };
+ db.ref('messages').on('value',listener);
+}
+
+function send(){
+ const input=document.getElementById('input'),text=input.value.trim();
+ if(!currentUser)return;
+ if(!text && !selectedMedia){toast('پیام یا فایل انتخاب کن ❤️');return}
+ const data={name:currentUser,text:text,timestamp:Date.now()};
+ if(replyTo)data.reply={name:replyTo.name,text:replyTo.text};
+ if(selectedMedia){Object.assign(data,selectedMedia)}
+ db.ref('messages').push(data).then(()=>{input.value='';cancelReply();cancelMedia();setTyping(false);toggleEmoji(false)}).catch(()=>toast('خطا در ارسال پیام ❌'));
+}
+
+function prepareMedia(file){
+ if(!file)return;
+ if(file.size>50*1024*1024){toast('حجم فایل باید کمتر از ۵۰ مگابایت باشد ❌');return}
+ selectedMedia={file,fileName:file.name,mediaType:file.type.startsWith('image/')?'image':file.type.startsWith('video/')?'video':'file'};
+ document.getElementById('mediaName').textContent='📎 '+file.name+' آماده ارسال است';
+ document.getElementById('mediaPreview').style.display='block';
+}
+function cancelMedia(){selectedMedia=null;const f=document.getElementById('fileInput');if(f)f.value='';document.getElementById('mediaPreview').style.display='none'}
+async function uploadSelectedMedia(){
+ if(!selectedMedia)return null;
+ const file=selectedMedia.file;
+ const path='uploads/'+currentUser+'/'+Date.now()+'_'+file.name.replace(/[^\w.\-آ-ی ]/g,'_');
+ const task=storage.ref(path).put(file);
+ document.getElementById('uploading').style.display='flex';
+ return new Promise((resolve,reject)=>{
+  task.on('state_changed',snap=>{
+   const p=Math.round(snap.bytesTransferred/snap.totalBytes*100);
+   document.getElementById('uploadBar').style.width=p+'%';document.getElementById('uploadText').textContent=p+'٪';
+  },err=>{document.getElementById('uploading').style.display='none';reject(err)},async()=>{
+   const url=await task.snapshot.ref.getDownloadURL();
+   document.getElementById('uploading').style.display='none';
+   resolve({url,mediaType:selectedMedia.mediaType,fileName:file.name});
+  });
+ });
+}
+
+const originalSend=send;
+send=async function(){
+ const input=document.getElementById('input'),text=input.value.trim();
+ if(!currentUser)return;
+ if(!text&&!selectedMedia){toast('پیام یا فایل انتخاب کن ❤️');return}
+ let media=null;
+ try{if(selectedMedia)media=await uploadSelectedMedia()}catch(e){toast('آپلود فایل انجام نشد ❌');return}
+ const data={name:currentUser,text,timestamp:Date.now()};
+ if(replyTo)data.reply={name:replyTo.name,text:replyTo.text};
+ if(media)Object.assign(data,media);
+ db.ref('messages').push(data).then(()=>{input.value='';cancelReply();cancelMedia();setTyping(false);toggleEmoji(false)}).catch(()=>toast('خطا در ارسال پیام ❌'));
+};
+
+function toggleRecording(){
+ if(recording){mediaRecorder?.stop();return}
+ if(!navigator.mediaDevices?.getUserMedia){toast('مرورگر شما ضبط صدا را پشتیبانی نمی‌کند ❌');return}
+ navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+  audioChunks=[];mediaRecorder=new MediaRecorder(stream);recording=true;
+  const btn=document.getElementById('voiceBtn');btn.classList.add('recording');btn.textContent='⏹️';
+  mediaRecorder.ondataavailable=e=>{if(e.data.size)audioChunks.push(e.data)};
+  mediaRecorder.onstop=async()=>{
+   stream.getTracks().forEach(t=>t.stop());recording=false;btn.classList.remove('recording');btn.textContent='🎤';
+   const blob=new Blob(audioChunks,{type:mediaRecorder.mimeType||'audio/webm'});
+   selectedMedia={file:new File([blob],'voice_'+Date.now()+'.webm',{type:blob.type}),fileName:'🎤 پیام صوتی',mediaType:'audio'};
+   document.getElementById('mediaName').textContent='🎤 ویس آماده ارسال است';
+   document.getElementById('mediaPreview').style.display='block';
+   toast('ویس ضبط شد؛ دکمه ارسال را بزن 🎤');
+  };
+  mediaRecorder.start();
+  toast('در حال ضبط ویس... برای پایان دوباره 🎤 را بزن');
+ }).catch(()=>toast('اجازه میکروفون داده نشد ❌'));
+}
+
+function handleTyping(){if(!currentUser)return;setTyping(true);clearTimeout(typingTimer);typingTimer=setTimeout(()=>setTyping(false),1500)}
+function setTyping(value){if(currentUser)db.ref('typing/'+currentUser).set(value)}
+function watchTyping(){
+ if(!currentUser)return;
+ const other=currentUser==='Hasan'?'N':'Hasan';
+ db.ref('typing/'+other).on('value',s=>{document.getElementById('typing').textContent=s.val()?other+' در حال نوشتن... 💜':''});
+}
+function openActions(m,el){
+ selectedMessage=m;const actions=document.getElementById('actions'),rect=el.getBoundingClientRect();
+ actions.style.display='block';let top=rect.top-210;if(top<10)top=10;let left=rect.left;if(left+235>window.innerWidth-10)left=window.innerWidth-245;
+ actions.style.top=top+'px';actions.style.left=left+'px';
+ document.getElementById('editButton').style.display=m.name===currentUser?'block':'none';
+ document.getElementById('deleteButton').style.display=m.name===currentUser?'block':'none';
+}
+function closeActions(){document.getElementById('actions').style.display='none'}
+document.addEventListener('click',e=>{const a=document.getElementById('actions');if(a.style.display==='block'&&!a.contains(e.target))closeActions()});
+function chooseReaction(reaction){if(!selectedMessage)return;const id=selectedMessage.id;if(selectedMessage.reaction===reaction)reaction='';db.ref('messages/'+id+'/reaction').set(reaction);closeActions()}
+function startReply(){if(!selectedMessage)return;replyTo=selectedMessage;document.getElementById('replyName').textContent=selectedMessage.name;document.getElementById('replyText').textContent=selectedMessage.text||selectedMessage.fileName||'فایل';document.getElementById('replyPreview').style.display='block';document.getElementById('input').focus();closeActions()}
+function cancelReply(){replyTo=null;document.getElementById('replyPreview').style.display='none'}
+function copySelected(){if(!selectedMessage)return;navigator.clipboard?.writeText(selectedMessage.text||selectedMessage.fileName||'');toast('پیام کپی شد 📋');closeActions()}
+function editSelected(){if(!selectedMessage||selectedMessage.name!==currentUser)return;const newText=prompt('متن جدید پیام:',selectedMessage.text||'');if(newText===null||!newText.trim()){closeActions();return}db.ref('messages/'+selectedMessage.id).update({text:newText.trim(),edited:true,editedAt:Date.now()});closeActions();toast('پیام ویرایش شد ✏️')}
+function deleteSelected(){if(!selectedMessage||selectedMessage.name!==currentUser)return;if(!confirm('این پیام حذف شود؟')){closeActions();return}db.ref('messages/'+selectedMessage.id).remove();closeActions();toast('پیام حذف شد 🗑️')}
+function pinSelected(){if(!selectedMessage)return;const newValue=!selectedMessage.pinned;db.ref('messages/'+selectedMessage.id+'/pinned').set(newValue);closeActions();toast(newValue?'پیام سنجاق شد 📌':'سنجاق برداشته شد')}
+function toggleSearch(){const bar=document.getElementById('searchbar');bar.style.display=bar.style.display==='block'?'none':'block';document.getElementById('menu').style.display='none';if(bar.style.display==='block')document.getElementById('searchInput').focus()}
+function searchMessages(){load()}
+function setOnline(value){
+ if(!currentUser)return;
+ db.ref('presence/'+currentUser).set({online:value,lastSeen:firebase.database.ServerValue.TIMESTAMP});
+ db.ref('presence/'+currentUser).onDisconnect().update({online:false,lastSeen:firebase.database.ServerValue.TIMESTAMP});
+ const other=currentUser==='Hasan'?'N':'Hasan';
+ db.ref('presence/'+other).on('value',s=>{const d=s.val()||{},status=document.getElementById('status');if(d.online){status.textContent='● آنلاین';status.classList.add('online')}else{status.textContent='● آفلاین';status.classList.remove('online')}});
+ watchTyping();
+}
+function toggleEmoji(force){
+ const p=document.getElementById('emojiPanel');p.style.display=force===false?'none':(p.style.display==='block'?'none':'block');
+}
+function insertEmoji(e){const input=document.getElementById('input');input.value+=e;input.focus();toggleEmoji(false);handleTyping()}
+let pushForegroundListenerSet=false;
+async function requestNotify(){
+ try{
+  if(!currentUser){toast('اول وارد حساب خودت شو ❤️');return}
+  if(!('Notification' in window) || !('serviceWorker' in navigator) || !firebase.messaging){toast('این مرورگر Push را پشتیبانی نمی‌کند ❌');return}
+  const permission=await Notification.requestPermission();
+  if(permission!=='granted'){toast('اجازه اعلان داده نشد ❌');return}
+  const supported=await firebase.messaging.isSupported();
+  if(!supported){toast('اعلان Push در این مرورگر پشتیبانی نمی‌شود ❌');return}
+  const registration=await navigator.serviceWorker.register('./sw.js');
+  const messaging=firebase.messaging();
+  const token=await messaging.getToken({
+   vapidKey:'BLPEUp5WzG6MComvKS7PcSyuqSRRaf_zsSgf3bwcr241skWXyetBIpGdWjqv6ofhBLH43nenjCHDVgHG6LwOrx4',
+   serviceWorkerRegistration:registration
+  });
+  if(!token){toast('توکن اعلان ساخته نشد؛ دوباره تلاش کن ❌');return}
+  await db.ref('pushTokens/'+currentUser+'/'+token).set({user:currentUser,token:token,updatedAt:Date.now()});
+  localStorage.setItem('pushEnabled','true');
+  if(!pushForegroundListenerSet){
+   messaging.onMessage(payload=>{
+    const n=payload.notification||{};
+    toast((n.title||'Hasan ♥ N')+' — '+(n.body||'پیام جدید ❤️'));
+   });
+   pushForegroundListenerSet=true;
+  }
+  toast('اعلان پیام فعال شد 🔔 حالا یک پیام آزمایشی بفرست');
+ }catch(e){console.error('Push setup failed:',e);toast('فعال‌سازی اعلان ناموفق بود ❌؛ سایت باید از HTTPS باز شود');}
+}
+function showHome(){
+ document.getElementById('chat').style.display='none';
+ document.getElementById('home').style.display='block';
+ document.getElementById('login').style.display='none';
+ document.getElementById('menu').style.display='none';
+ closeActions();
+}
+function openChat(){
+ if(!currentUser){return}
+ closePanels();
+ document.getElementById('home').style.display='none';
+ document.getElementById('chat').style.display='flex';
+ document.getElementById('login').style.display='none';
+}
+function updateHomeCounter(){
+ const el=document.getElementById('homeCounter');
+ if(!el)return;
+ const ms=Math.max(0,Date.now()-start),days=Math.floor(ms/86400000),hours=Math.floor(ms%86400000/3600000);
+ el.querySelector('small').textContent=`${days} روز و ${hours} ساعت کنار هم ❤️`;
+}
+function toggleMenu(){const m=document.getElementById('menu');m.style.display=m.style.display==='block'?'none':'block'}
+function openPanel(id){document.getElementById('menu').style.display='none';document.getElementById(id).style.display='flex'}
+function closePanels(){document.querySelectorAll('.panel').forEach(x=>x.style.display='none')}
+function toggleDark(){const app=document.getElementById('app');app.classList.toggle('dark');localStorage.dark=app.classList.contains('dark')}
+function logout(){if(currentUser){setOnline(false);setTyping(false)}currentUser=null;localStorage.removeItem('chatUser');location.reload()}
+function clearLocal(){localStorage.clear();location.reload()}
+function toast(text){const x=document.getElementById('toast');x.textContent=text;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+
+const start=new Date('2025-06-13T00:00:00');
+function counter(){
+ const ms=Math.max(0,Date.now()-start),days=Math.floor(ms/86400000),hours=Math.floor(ms%86400000/3600000),minutes=Math.floor(ms%3600000/60000),seconds=Math.floor(ms%60000/1000);
+ document.getElementById('counter').innerHTML=`❤️<div class="big">${days} روز</div><div>${hours} ساعت ${minutes} دقیقه ${seconds} ثانیه</div><div class="small">از ۲۳ خرداد ۱۴۰۴ تا امروز ❤️</div>`;
+ const hc=document.getElementById('homeCounter');if(hc)hc.querySelector('small').textContent=`${days} روز و ${hours} ساعت کنار هم ❤️`;
+}
+counter();setInterval(counter,1000);
+if(localStorage.dark==='true')document.getElementById('app').classList.add('dark');
+document.getElementById('hasanLogin').addEventListener('click',()=>login('Hasan'));
+document.getElementById('nadiLogin').addEventListener('click',()=>login('N'));
+document.getElementById('input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send()}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&currentUser)setOnline(true)});
+if(localStorage.chatUser){
+ currentUser=localStorage.chatUser;document.getElementById('login').style.display='none';document.getElementById('chat').style.display='none';document.getElementById('home').style.display='block';
+ document.getElementById('profileName').textContent='سلام '+currentUser+' 👋';document.getElementById('homeGreeting').textContent='سلام '+currentUser+' 👋';load();setOnline(true);updateHomeCounter();
+}
+
+/* ===== LUDO ONLINE ===== */
+let ludoRoom=null,ludoValue=null,ludoRef=null,ludoPlayer=null;
+const LTRACK=[];
+for(let i=0;i<52;i++){const a=2*Math.PI*i/52-Math.PI/2;LTRACK.push({x:50+38*Math.cos(a),y:50+38*Math.sin(a)})}
+const LSTART={Hasan:0,N:26};
+const LDICE=['','⚀','⚁','⚂','⚃','⚄','⚅'];
+
+function openLudo(){
+ document.getElementById('home').style.display='none';document.getElementById('chat').style.display='none';document.getElementById('ludo').style.display='block';
+ if(ludoRoom){document.getElementById('lobby').style.display='none';document.getElementById('lgame').style.display='block';}
+}
+function closeLudo(){
+ if(ludoRef&&ludoRoom)db.ref('ludo/'+ludoRoom).off('value',ludoRef);
+ ludoRef=null;ludoRoom=null;ludoValue=null;document.getElementById('ludo').style.display='none';document.getElementById('lwin').style.display='none';showHome();
+}
+function newRoom(){return Math.random().toString(36).slice(2,8).toUpperCase()}
+function baseLudo(){
+ return {players:{Hasan:{joined:false,t:[-1,-1,-1,-1],done:0},N:{joined:false,t:[-1,-1,-1,-1],done:0}},turn:null,dice:0,rolled:false,winner:'',log:'اتاق ساخته شد؛ منتظر بازیکن دوم ❤️'}
+}
+async function createLudo(){
+ const room=newRoom(),s=baseLudo();s.players[currentUser].joined=true;s.turn=currentUser;
+ try{await db.ref('ludo/'+room).set(s);listenLudo(room)}catch(e){toast('ساخت بازی انجام نشد ❌')}
+}
+async function joinLudo(){
+ const room=(document.getElementById('joinCode').value||'').trim().toUpperCase();
+ if(room.length!==6){toast('کد ۶ حرفی وارد کن ❌');return}
+ const snap=await db.ref('ludo/'+room).once('value'),s=snap.val();
+ if(!s){toast('اتاق پیدا نشد ❌');return}
+ if(s.players[currentUser]?.joined){listenLudo(room);return}
+ if(s.players.Hasan.joined&&s.players.N.joined){toast('اتاق پر است ❌');return}
+ await db.ref('ludo/'+room+'/players/'+currentUser+'/joined').set(true);
+ await db.ref('ludo/'+room+'/log').set(currentUser+' وارد بازی شد 🎲');
+ listenLudo(room);
+}
+function listenLudo(room){
+ if(ludoRef&&ludoRoom)db.ref('ludo/'+ludoRoom).off('value',ludoRef);
+ ludoRoom=room;document.getElementById('roomCode').textContent=room;document.getElementById('lobby').style.display='none';document.getElementById('lgame').style.display='block';
+ ludoRef=s=>{ludoValue=s.val();renderLudo()};db.ref('ludo/'+room).on('value',ludoRef)
+}
+function readyLudo(){return !!(ludoValue?.players?.Hasan?.joined&&ludoValue?.players?.N?.joined)}
+function canRoll(){return readyLudo()&&ludoValue.turn===currentUser&&!ludoValue.rolled&&!ludoValue.winner}
+async function rollLudo(){
+ if(!canRoll())return;
+ const d=Math.floor(Math.random()*6)+1;
+ await db.ref('ludo/'+ludoRoom).update({dice:d,rolled:true,log:currentUser+' تاس ریخت: '+d+' 🎲'});
+ renderLudo()
+}
+function tokenCanMove(p,pos,d){
+ if(!d)return false;
+ if(pos===-1)return d===6;
+ return pos<51 && pos+d<=57;
+}
+async function moveToken(i){
+ const s=ludoValue,p=currentUser,d=s.dice;
+ if(!s.rolled||s.turn!==p||!tokenCanMove(p,s.players[p].t[i],d))return;
+ let t=s.players[p].t.slice(),pos=t[i];
+ if(pos===-1)pos=0;else pos+=d;
+ let done=s.players[p].done||0;
+ if(pos>=57){pos=57;done++}
+ t[i]=pos;
+ const updates={};updates['players/'+p+'/t']=t;updates['players/'+p+'/done']=done;
+ // Capture opponent when both are on the same track cell; starts are safe.
+ if(pos>=0&&pos<52){
+  const opp=p==='Hasan'?'N':'Hasan',ot=s.players[opp].t.slice(),oppStart=LSTART[opp];
+  const abs=(oppStart+pos)%52;
+  let captured=false;
+  ot=ot.map(x=>{if(x>=0&&x<52&&(oppStart+x)%52===abs){captured=true;return -1}return x});
+  if(captured)updates['players/'+opp+'/t']=ot;
+ }
+ const next=d===6?p:(p==='Hasan'?'N':'Hasan');
+ updates.turn=next;updates.dice=0;updates.rolled=false;updates.log=p+' مهره '+(i+1)+' را حرکت داد ❤️';
+ if(done>=4)updates.winner=p;
+ await db.ref('ludo/'+ludoRoom).update(updates);
+}
+function renderLudo(){
+ const s=ludoValue;if(!s)return;
+ const ready=readyLudo();document.getElementById('roomStatus').textContent=ready?'هر دو بازیکن آماده‌اند 🎲':'در انتظار بازیکن دوم...';
+ document.getElementById('dice').disabled=!canRoll();document.getElementById('dice').textContent=s.dice?LDICE[s.dice]:'🎲';
+ document.getElementById('turnTitle').textContent=s.winner?s.winner+' برنده شد 🏆':(ready?'نوبت '+s.turn:'منتظر بازیکن دوم...');
+ document.getElementById('turnSub').textContent=s.rolled?'تاس: '+s.dice+' — مهره قابل حرکت را لمس کن':'برای ریختن تاس دکمه را بزن';
+ document.getElementById('llog').textContent=s.log||'';
+ document.getElementById('lpHasan').classList.toggle('active',ready&&s.turn==='Hasan');
+ document.getElementById('lpNadi').classList.toggle('active',ready&&s.turn==='N');
+ document.querySelector('#lpHasan small').textContent=(s.players.Hasan.done||0)+'/۴ به پایان';
+ document.querySelector('#lpNadi small').textContent=(s.players.N.done||0)+'/۴ به پایان';
+ drawTokens(s);
+ if(s.winner){document.getElementById('winText').textContent=s.winner+' برنده شد! ❤️';document.getElementById('lwin').style.display='flex'}
+}
+function drawTokens(s){
+ document.querySelectorAll('#lboard .ltoken').forEach(e=>e.remove());
+ for(const p of ['Hasan','N']){
+  const cls=p==='Hasan'?'a':'b',arr=s.players[p].t||[];
+  arr.forEach((pos,i)=>{
+   const e=document.createElement('button');e.className='ltoken '+cls;
+   const movable=p===currentUser&&s.rolled&&s.turn===p&&tokenCanMove(p,pos,s.dice);
+   if(movable)e.classList.add('movable');e.textContent=i+1;e.onclick=()=>moveToken(i);
+   let x,y;
+   if(pos===-1){
+    const spots=p==='Hasan'?[[78,15],[88,15],[78,25],[88,25]]:[[12,75],[22,75],[12,85],[22,85]];[x,y]=spots[i]
+   }else if(pos>=52){x=50;y=50}
+   else{const a=(LSTART[p]+pos)%52;({x,y}=LTRACK[a])}
+   e.style.left=`calc(${x}% - 12px)`;e.style.top=`calc(${y}% - 12px)`;document.getElementById('lboard').appendChild(e)
+  })
+ }
+}
+async function resetLudo(){
+ const s=baseLudo();s.players[currentUser].joined=true;s.players[currentUser==='Hasan'?'N':'Hasan'].joined=true;s.turn='Hasan';
+ await db.ref('ludo/'+ludoRoom).set(s);document.getElementById('lwin').style.display='none'
+}
+function copyLudoCode(){navigator.clipboard?.writeText(ludoRoom).then(()=>toast('کد بازی کپی شد 📋')).catch(()=>toast('کد: '+ludoRoom))}
+
+
+// Galaxy canvas: lightweight animated stars and touch-triggered hearts.
+let galaxyRAF=0,galaxyRunning=false,galaxyStars=[],galaxyHearts=[];
+function openUniverse(){closePanels();document.getElementById('home').style.display='none';document.getElementById('chat').style.display='none';document.getElementById('login').style.display='none';document.getElementById('universe').style.display='block';startGalaxy();}
+function closeUniverse(){document.getElementById('universe').style.display='none';stopGalaxy();showHome();}
+function startGalaxy(){const c=document.getElementById('galaxyCanvas');if(!c)return;const r=c.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);c.width=Math.max(1,Math.floor(r.width*dpr));c.height=Math.max(1,Math.floor(r.height*dpr));const ctx=c.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);galaxyStars=Array.from({length:Math.min(150,Math.floor(r.width*r.height/4200))},()=>({x:Math.random()*r.width,y:Math.random()*r.height,r:Math.random()*1.6+.3,a:Math.random()*.7+.2,s:Math.random()*.012+.003,phase:Math.random()*6.28}));galaxyRunning=true;cancelAnimationFrame(galaxyRAF);function frame(t){if(!galaxyRunning)return;ctx.clearRect(0,0,r.width,r.height);const g=ctx.createRadialGradient(r.width*.5,r.height*.48,5,r.width*.5,r.height*.48,Math.max(r.width,r.height)*.72);g.addColorStop(0,'rgba(126,34,206,.14)');g.addColorStop(1,'rgba(3,2,12,0)');ctx.fillStyle=g;ctx.fillRect(0,0,r.width,r.height);for(const st of galaxyStars){st.phase+=st.s;ctx.globalAlpha=st.a*(.65+.35*Math.sin(st.phase));ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(st.x,st.y,st.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;galaxyHearts=galaxyHearts.filter(h=>h.life>0);for(const h of galaxyHearts){h.y-=h.speed;h.x+=Math.sin((h.life+h.seed)*.06)*.45;h.life--;ctx.globalAlpha=Math.min(1,h.life/25);ctx.font=h.size+'px sans-serif';ctx.fillText('♥',h.x,h.y)}ctx.globalAlpha=1;galaxyRAF=requestAnimationFrame(frame)}frame(0);c.onclick=(e)=>{const b=c.getBoundingClientRect();addGalaxyHeart(e.clientX-b.left,e.clientY-b.top,1)};c.ontouchmove=null;}
+function stopGalaxy(){galaxyRunning=false;cancelAnimationFrame(galaxyRAF)}
+function addGalaxyHeart(x,y,n=1){for(let i=0;i<n;i++)galaxyHearts.push({x:x+(Math.random()-.5)*30,y:y+(Math.random()-.5)*25,life:120+Math.random()*70,speed:.35+Math.random()*.9,size:14+Math.random()*18,seed:Math.random()*100})}
+function spawnHearts(){const c=document.getElementById('galaxyCanvas');if(!c)return;addGalaxyHeart(c.clientWidth*(.25+Math.random()*.5),c.clientHeight*(.35+Math.random()*.35),18);}
+window.addEventListener('resize',()=>{if(galaxyRunning)startGalaxy()});
+async function sha256Hex(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+function randomGiftId(){return Math.random().toString(36).slice(2,6).toUpperCase()+Date.now().toString(36).slice(-5).toUpperCase()}
+async function createSurprise(){try{if(!currentUser){toast('اول وارد سایت شو');return}const title=document.getElementById('giftTitle').value.trim()||'یه سورپرایز عاشقانه ❤️';const message=document.getElementById('giftMessage').value.trim();const code=document.getElementById('giftCode').value;if(!message){toast('پیام داخل جعبه رو بنویس');return}if(code.trim().length<4){toast('رمز باید حداقل ۴ کاراکتر باشه');return}const recipient=document.getElementById('giftRecipient').value;if(recipient===currentUser){toast('لطفاً نفر مقابل رو انتخاب کن');return}const id=randomGiftId();const codeHash=await sha256Hex(code);await db.ref('surprises/'+recipient+'/'+id).set({id,title,message,codeHash,from:currentUser,to:recipient,createdAt:Date.now(),opened:false});document.getElementById('openGiftId').value=id;document.getElementById('giftTitle').value='';document.getElementById('giftMessage').value='';document.getElementById('giftCode').value='';toast('جعبه ساخته شد! کد '+id+' رو برای طرف مقابل بفرست 🎁');}catch(e){console.error(e);toast('ساخت جعبه انجام نشد؛ اتصال رو بررسی کن')}}
+async function openSurprise(){const id=document.getElementById('openGiftId').value.trim().toUpperCase();const code=document.getElementById('openGiftCode').value;if(!id||!code){toast('کد جعبه و رمز رو وارد کن');return}const out=document.getElementById('surpriseResult');out.style.display='block';out.innerHTML='<div class="surprise-gift">🔎 در حال بررسی جعبه...</div>';try{const snap=await db.ref('surprises/'+currentUser+'/'+id).once('value');const gift=snap.val();if(!gift){out.innerHTML='<div class="surprise-gift">این جعبه پیدا نشد یا برای حساب دیگری ساخته شده.</div>';return}const hash=await sha256Hex(code);if(hash!==gift.codeHash){out.innerHTML='<div class="surprise-gift">🔒 رمز درست نیست. دوباره امتحان کن.</div>';return}out.innerHTML='<div class="surprise-gift"><div class="gift-icon">💝</div><h3>'+escapeHTML(gift.title)+'</h3><p style="white-space:pre-wrap;line-height:1.9;margin-top:12px">'+escapeHTML(gift.message)+'</p><small style="display:block;margin-top:12px">با عشق از طرف '+escapeHTML(gift.from)+' ❤️</small></div>';document.getElementById('openGiftCode').value='';}catch(e){console.error(e);out.innerHTML='<div class="surprise-gift">مشکلی در بازکردن جعبه پیش آمد. دوباره تلاش کن.</div>'}}
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+</script>
+</body>
+</html>
